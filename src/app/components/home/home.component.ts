@@ -37,15 +37,15 @@ import { CommonModule } from '@angular/common';
               <p *ngIf="errors.email" class="text-red-600 text-sm mt-1">{{ errors.email }}</p>
             </div>
             <div class="mb-4">
-              <label for="age" class="block text-sm font-medium text-gray-700">Age:</label>
+              <label for="mobile" class="block text-sm font-medium text-gray-700">Mobile No:</label>
               <input
-                id="age"
-                [(ngModel)]="student.age"
-                name="age"
-                type="number"
+                id="mobile"
+                [(ngModel)]="student.mobile"
+                name="mobile"
+                type="text"
                 class="mt-1 p-2 border w-full rounded"
               />
-              <p *ngIf="errors.age" class="text-red-600 text-sm mt-1">{{ errors.age }}</p>
+              <p *ngIf="errors.mobile" class="text-red-600 text-sm mt-1">{{ errors.mobile }}</p>
             </div>
             <button
               type="submit"
@@ -67,7 +67,7 @@ import { CommonModule } from '@angular/common';
             <div class="mb-4 flex flex-col gap-3">
               <p class="text-md"><strong>Registered Name:</strong> {{ student.name }}</p>
               <p class="text-md"><strong>Registered Email:</strong> {{ student.email }}</p>
-              <p class="text-md"><strong>Registered Age:</strong> {{ student.age }}</p>
+              <p class="text-md"><strong>Registered Mobile No:</strong> {{ student.mobile }}</p>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@ export class HomeComponent {
   student = {
     name: '',
     email: '',
-    age: 0,
+    mobile: '',
   };
   message = '';
   showDetails = false;
@@ -88,7 +88,7 @@ export class HomeComponent {
   errors = {
     name: '',
     email: '',
-    age: '',
+    mobile: '',
   };
 
   submitForm() {
@@ -103,9 +103,10 @@ export class HomeComponent {
   }
 
   validateData(): boolean {
-    const { name, email, age } = this.student;
+    const { name, email, mobile } = this.student;
     let isValid = true;
 
+    // Name validation
     if (name.trim() === '') {
       this.errors.name = 'Name is required.';
       isValid = false;
@@ -114,6 +115,7 @@ export class HomeComponent {
       isValid = false;
     }
 
+    // Email validation
     if (email.trim() === '') {
       this.errors.email = 'Email is required.';
       isValid = false;
@@ -122,8 +124,12 @@ export class HomeComponent {
       isValid = false;
     }
 
-    if (age <= 0) {
-      this.errors.age = 'Age must be greater than 0.';
+    // Mobile number validation
+    if (mobile.trim() === '') {
+      this.errors.mobile = 'Mobile number is required.';
+      isValid = false;
+    } else if (!/^\d{10}$/.test(mobile)) {
+      this.errors.mobile = 'Mobile number must be exactly 10 digits.';
       isValid = false;
     }
 
@@ -131,6 +137,6 @@ export class HomeComponent {
   }
 
   clearErrors() {
-    this.errors = { name: '', email: '', age: '' };
+    this.errors = { name: '', email: '', mobile: '' };
   }
 }
