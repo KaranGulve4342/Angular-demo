@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
         
         <!-- first panel -->
         <div class="p-6 border rounded-lg shadow-sm hover:border-violet-500">
-          <h2 class="text-lg font-semibold mb-4 text-violet-600">Student Registration</h2>
+          <h2 class="text-lg font-semibold mb-6 text-violet-600">Student Registration</h2>
           <form (ngSubmit)="submitForm()">
             <div class="mb-4">
               <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
